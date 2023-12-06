@@ -7,7 +7,6 @@ edition = "2021"
 
 [dependencies]
 cxx = "1.0"
-gdal-sys = "0.9.1"
 
 [build-dependencies]
 cxx-build = "1.0"

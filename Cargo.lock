@@ -66,23 +66,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "gdal-sys"
-version = "0.9.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ab73a6c9d0d620fb5b07e02ffbb8ae08f053299cbe5db0c1bbe1d58cb33e3f38"
-dependencies = [
- "libc",
- "pkg-config",
- "semver",
-]
-
-[[package]]
 name = "gddk-rs"
 version = "0.1.0"
 dependencies = [
  "cxx",
  "cxx-build",
- "gdal-sys",
  "pkg-config",
 ]
 
@@ -136,12 +124,6 @@ name = "scratch"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a3cf7c11c38cb994f3d40e8a8cde3bbd1f72a435e4c49e85d6553d8312306152"
-
-[[package]]
-name = "semver"
-version = "1.0.20"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "836fa6a3e1e547f9a2c4040802ec865b5d85f4014efe00555d7090a3dcaa1090"
 
 [[package]]
 name = "syn"

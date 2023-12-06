@@ -1,6 +1,6 @@
 
 #[cxx::bridge]
-mod gdal_ddk {
+pub mod gdal_ddk {
     struct RustDriverMetadata {
         name: String,
         long_name: String,
@@ -8,7 +8,7 @@ mod gdal_ddk {
 
     unsafe extern "C++" {
         include!("gddk-rs/include/gdal_shim.h");
-        fn register_rust_driver(meta: RustDriverMetadata);
+        pub fn register_rust_driver(meta: RustDriverMetadata, ctor: fn(i32, i32) -> i32);
     }
 }
 
@@ -24,7 +24,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let meta = RustDriverMetadata::new("RUST".into(),"Demo driver written in Rust".into());
-        register_rust_driver(meta);
+        let meta = RustDriverMetadata::new("RUST".into(), "Demo driver written in Rust".into());
+        register_rust_driver(meta, |a, b| a+b);
     }
 }
