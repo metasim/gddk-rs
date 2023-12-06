@@ -1,25 +1,30 @@
 
 #[cxx::bridge]
-mod ffi {
+mod gdal_ddk {
+    struct RustDriverMetadata {
+        name: String,
+        long_name: String,
+    }
+
     unsafe extern "C++" {
         include!("gddk-rs/include/gdal_shim.h");
-        pub type GDALDriverManager;
-        pub fn get_driver_manager() -> UniquePtr<GDALDriverManager>;
-        pub fn GetDriverCount(&self) -> i32;
+        fn register_rust_driver(meta: RustDriverMetadata);
     }
 }
 
+impl gdal_ddk::RustDriverMetadata {
+    pub fn new(name: String, long_name: String) -> Self {
+        Self { name, long_name }
+    }
+}
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use crate::gdal_ddk::*;
 
     #[test]
     fn it_works() {
-        let dmgr = ffi::get_driver_manager();
-        //dmgr.AutoLoadDrivers();
-        dbg!(dmgr.is_null());
-        let cnt = dmgr.GetDriverCount();
-        dbg!(cnt);
+        let meta = RustDriverMetadata::new("RUST".into(),"Demo driver written in Rust".into());
+        register_rust_driver(meta);
     }
 }
